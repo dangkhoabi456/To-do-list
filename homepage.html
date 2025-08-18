@@ -11,7 +11,9 @@
 </head>
 <body>
     <div id="main">
+        <!-- header -->
         <div id="header">
+            <!-- navbar -->
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
                 <a class="navbar-brand" href="#"><img src="./assets/img/to-do-list-favicon.png" alt=""></a>
@@ -21,16 +23,29 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="display: flex; justify-content: center; width: 50vw; gap: 20px;">
                         <li class="nav-item list-item">
-                            <a class="nav-link" id="inbox" aria-current="page" href="#"><i class="ti-plus me-1"></i>Add task</a>
+                            <a class="nav-link section" data-target="add-task-section" id="add-task" aria-current="page" href="#"><i class="ti-plus me-1"></i>Add task</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="today" aria-current="page" href="#"><i class="ti-clipboard me-1"></i>Today</a>
+                            <a class="nav-link section" data-target="today-section" id="today" aria-current="page" href="#"><i class="ti-clipboard me-1"></i>Today</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="upcoming" aria-current="page" href="#"><i class="ti-calendar me-1"></i>Upcoming</a>
+                            <a class="nav-link section" data-target="upcoming-section" id="upcoming" aria-current="page" href="#"><i class="ti-calendar me-1"></i>Upcoming</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="completed" aria-current="page" href="#"><i class="ti-check me-1"></i>Completed</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Completed/Cancelled
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item nav-link section" data-target="completed-section" href="#"><i class="ti-check me-1"></i>Completed</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <a class="dropdown-item nav-link section" data-target="canceled-section" href="#"><i class="ti-close me-1"></i>Cancelled</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                     <form class="d-flex" role="search" style="position: relative; right: 10vw;">
@@ -41,11 +56,35 @@
         </div>
     </nav>
         </div>
+        <!-- content -->
         <div id="content">
-            <div class="container-sm">
-                
+            <div id="add-task-section" class="item-list">
+                <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+                    <div class="card" style="width: 600px;">
+                        <h5 class="card-title" style="text-align: center;">Add task</h5>
+                        <form class="d-flex flex-column" id="add-task-form"> 
+                            <input class="form-control mx-auto mt-3 mb-0 text-center" type="text" id="task-name" placeholder="Enter task name" aria-label="username">
+                            <input class="form-control mx-auto mt-3 mb-0 text-center" type="text" id="task-description" placeholder="Enter task description" aria-label="password">
+                            <input class="form-control mx-auto mt-3 mb-0 text-center" type="date" id="task-deadline"  aria-label="choose deadline">
+                            <button class="btn btn-outline-success mx-auto mt-3 mb-2" id="add-task-button">Add task</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div id="today-section" class="item-list">
+                <p>Today tasks will be displayed here</p>
+            </div>
+            <div id="upcoming-section" class="item-list">
+
+            </div>
+            <div id="completed-section" class="item-list">
+
+            </div>
+            <div id="canceled-section" class="item-list">
+
             </div>
         </div>
+        <!-- footer -->
         <div id="footer">
 
         </div>

@@ -16,21 +16,17 @@ const itemList = document.querySelectorAll('.item-list');
   });
 
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('add-task').addEventListener('click', function(event){
+    document.getElementById('add-task-button').addEventListener('click', function(event){
         event.preventDefault();
         const taskName = document.getElementById("task-name").value;
         const taskDescription = document.getElementById("task-description").value;
         const taskDeadline = document.getElementById("task-deadline").value;
-        
+
         console.log("Task Deadline: " + taskDeadline);
         console.log("Task Name: " + taskName);
         console.log("Task Description: " + taskDescription);
+        let addTaskForm = document.getElementById("add-task-form");
+        addTaskForm.reset();
+
     });
 });
-
-document.getElementById('add-task').addEventListener('click', function(){
-    console.log("Button clicked!");
-});
-
-let number = 1;
-console.log("Number: " + number);

@@ -26,10 +26,7 @@
                             <a class="nav-link section" data-target="add-task-section" id="add-task" aria-current="page" href="#"><i class="ti-plus me-1"></i>Add task</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link section" data-target="today-section" id="today" aria-current="page" href="#"><i class="ti-clipboard me-1"></i>Today</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link section" data-target="upcoming-section" id="upcoming" aria-current="page" href="#"><i class="ti-calendar me-1"></i>Upcoming</a>
+                            <a class="nav-link section" data-target="task-section" id="task" aria-current="page" href="#"><i class="ti-clipboard me-1"></i>Today</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -62,20 +59,17 @@
                 <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
                     <div class="card" style="width: 600px;">
                         <h5 class="card-title" style="text-align: center;">Add task</h5>
-                        <form class="d-flex flex-column">
+                        <form class="d-flex flex-column" id="add-task-form"> 
                             <input class="form-control mx-auto mt-3 mb-0 text-center" type="text" id="task-name" placeholder="Enter task name" aria-label="username">
                             <input class="form-control mx-auto mt-3 mb-0 text-center" type="text" id="task-description" placeholder="Enter task description" aria-label="password">
                             <input class="form-control mx-auto mt-3 mb-0 text-center" type="date" id="task-deadline"  aria-label="choose deadline">
-                            <button class="btn btn-outline-success mx-auto mt-3 mb-2" id="add-task">Add task</button>
+                            <button class="btn btn-outline-success mx-auto mt-3 mb-2" id="add-task-button">Add task</button>
                         </form>
                     </div>
                 </div>
             </div>
-            <div id="today-section" class="item-list">
-                <p>Today tasks will be displayed here</p>
-            </div>
-            <div id="upcoming-section" class="item-list">
-
+            <div id="task-section" class="item-list">
+                <p> Tasks will be displayed here</p>
             </div>
             <div id="completed-section" class="item-list">
 
