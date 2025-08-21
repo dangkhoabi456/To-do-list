@@ -16,3 +16,22 @@
 input.form-control {
   width: 50%;
 }
+
+/*Task list section*/
+.task{
+  list-style: none;
+}
+.task-complete{
+  background-color: green;
+  color: white;
+  margin-right: 5px;
+  border-radius: 5px;
+  padding: 5px;
+}
+.task-cancel{
+  background-color: red;
+  color: white;
+  margin-left: 5px;
+  border-radius: 5px;
+  padding: 5px;
+}
