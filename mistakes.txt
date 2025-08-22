@@ -1,0 +1,10 @@
+1. lồng thẻ i vào a để icon có thể đứng sát với chữ:
+sai: <li><i class="ti-check"></i><a class="dropdown-item" href="#">Completed</a></li>
+đúng: <li><a class="dropdown-item" href="#"><i class="ti-check"></i>Completed</a></li>
+2. document.getElementsByClass() phải có số đánh thứ tự
+sai: let notify = document.getElementsByClassName("notify");
+đúng: let notify = document.getElementsByClassName("notify")[0];
+3. Tạo biến cục bộ thay vì tạo biến bên trong hàm, do biến cục bộ chỉ khai báo 1 lần,điều này
+khiến cho thay vì tạo task mới thì nó sẽ chỉ ghi đè nội dung của task cũ do nó tham chiếu 
+đến cùng 1 biến
+giải pháp: khai báo bên trong hàm, mỗi lần thực hiện hàm sẽ luôn tạo task mới

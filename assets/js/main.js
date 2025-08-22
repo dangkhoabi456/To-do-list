@@ -24,18 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const taskDescription = document.getElementById("task-description").value;
         const taskDeadline = document.getElementById("task-deadline").value;
 
-        
-
-        const input = document.getElementById("task-name");
-        input.addEventListener("input", function() {
-          let length = taskName.length;
-          let max = maxlength;
-          if(length > max){
-            alert("Task name cannot exceed 20 characters.");
-            addTaskForm.reset();
-          }
-        });
-
         console.log("Task Deadline: " + taskDeadline);
         console.log("Task Name: " + taskName);
         console.log("Task Description: " + taskDescription);
@@ -63,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const deadline = document.createElement("p");
         deadline.className = "task-deadline";
         deadline.textContent = "Deadline: " + taskDeadline;
+        deadline.setAttribute("datetime", taskDeadline);
         container.appendChild(deadline);
 
         const complete = document.createElement("button");
@@ -115,3 +104,26 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById("task-list").removeChild(taskNode);
     }
   });
+
+  setInterval(function(){
+    let currentTime = new Date();
+    let overdude = document.querySelectorAll('.task-deadline');
+    overdude.forEach(deadline => {
+      let deadLineTime = new Date(deadline.datetime);
+      if(currentTime > deadLineTime){
+        let taskNode = deadline.closest(".task");
+        let cloneNode = taskNode.cloneNode(true);
+
+        cloneNode.querySelector(".task-complete").remove();
+        cloneNode.querySelector(".task-cancel").remove();
+
+        let cancelStatus = document.createElement("p");
+        cancelStatus.className = "task-complete-status";
+        cancelStatus.textContent = "Task Canceled!";
+        cloneNode.appendChild(cancelStatus);
+
+        document.getElementById("task-list").removeChild(taskNode);
+        document.getElementById("canceled-list").appendChild(cloneNode);
+      }
+    });
+  }, 1000);
