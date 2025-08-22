@@ -60,8 +60,8 @@
                     <div class="card" style="width: 600px;">
                         <h5 class="card-title" style="text-align: center;">Add task</h5>
                         <form class="d-flex flex-column" id="add-task-form"> 
-                            <input class="form-control mx-auto mt-3 mb-0 text-center" type="text" id="task-name" placeholder="Enter task name" aria-label="username">
-                            <input class="form-control mx-auto mt-3 mb-0 text-center" type="text" id="task-description" placeholder="Enter task description" aria-label="password">
+                            <input class="form-control mx-auto mt-3 mb-0 text-center" type="text" id="task-name" placeholder="Enter task name" aria-label="task name" maxlength="20">
+                            <input class="form-control mx-auto mt-3 mb-0 text-center" type="text" id="task-description" placeholder="Enter task description" aria-label="task description" maxlength="50">
                             <input class="form-control mx-auto mt-3 mb-0 text-center" type="date" id="task-deadline"  aria-label="choose deadline">
                             <button class="btn btn-outline-success mx-auto mt-3 mb-2" id="add-task-button">Add task</button>
                         </form>
@@ -69,15 +69,19 @@
                 </div>
             </div>
             <div id="task-section" class="item-list">
-                <ul>
-                    <p>There are no task yet.</p>
+                <ul id="task-list">
+                    
                 </ul>
             </div>
             <div id="completed-section" class="item-list">
+                <ul id="completed-list">
 
+                </ul>
             </div>
             <div id="canceled-section" class="item-list">
+                <ul id="canceled-list">
 
+                </ul>
             </div>
         </div>
         <!-- footer -->
