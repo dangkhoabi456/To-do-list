@@ -14,39 +14,40 @@
         <!-- header -->
         <div id="header">
             <!-- navbar -->
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container-fluid">
                 <a class="navbar-brand" href="#"><img src="./assets/img/to-do-list-favicon.png" alt=""></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+
+                <i class="ti-menu" style="color: white;"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="display: flex; justify-content: center; width: 50vw; gap: 20px;">
-                        <li class="nav-item list-item">
+                        <li class="nav-item">
                             <a class="nav-link section" data-target="add-task-section" id="add-task" aria-current="page" href="#"><i class="ti-plus me-1"></i>Add task</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link section" data-target="task-section" id="task" aria-current="page" href="#"><i class="ti-clipboard me-1"></i>Tasks</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Completed/Cancelled
                             </a>
                             <ul class="dropdown-menu">
-                                <li>
+                                <li class="nav-item">
                                     <a class="dropdown-item nav-link section" data-target="completed-section" href="#"><i class="ti-check me-1"></i>Completed</a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li>
+                                <li class="nav-item">
                                     <a class="dropdown-item nav-link section" data-target="canceled-section" href="#"><i class="ti-close me-1"></i>Cancelled</a>
                                 </li>
                             </ul>
                         </li>
                     </ul>
-                    <form class="d-flex" role="search" style="position: relative; right: 10vw;">
-                        <input class="form-control me-2" type="search" aria-label="Search">
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" aria-label="Search" placeholder="Search task by name" id="search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
             </div>
@@ -58,26 +59,30 @@
             <div id="add-task-section" class="item-list">
                 <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
                     <div class="card" style="width: 600px;">
-                        <h5 class="card-title" style="text-align: center;">Add task</h5>
+                        <h5 class="card-title mt-2 text-center">Add task</h5>
                         <form class="d-flex flex-column" id="add-task-form"> 
-                            <input class="form-control mx-auto mt-3 mb-0 text-center" type="text" id="task-name" placeholder="Enter task name" aria-label="username">
-                            <input class="form-control mx-auto mt-3 mb-0 text-center" type="text" id="task-description" placeholder="Enter task description" aria-label="password">
-                            <input class="form-control mx-auto mt-3 mb-0 text-center" type="date" id="task-deadline"  aria-label="choose deadline">
-                            <button class="btn btn-outline-success mx-auto mt-3 mb-2" id="add-task-button">Add task</button>
+                            <input class="form-control mx-auto mt-3 mb-0 text-center" type="text" id="task-name" placeholder="Enter task name" aria-label="task name" maxlength="20">
+                            <input class="form-control mx-auto mt-3 mb-0 text-center" type="text" id="task-description" placeholder="Enter task description" aria-label="task description" maxlength="50">
+                            <input class="form-control mx-auto mt-3 mb-0 text-center" type="datetime-local" id="task-deadline"  aria-label="choose deadline">
+                            <button class="btn mx-auto mt-3 mb-2" id="add-task-button">Add task</button>
                         </form>
                     </div>
                 </div>
             </div>
             <div id="task-section" class="item-list">
-                <ul>
-                    <p>There are no task yet.</p>
+                <ul id="task-list">
+                    
                 </ul>
             </div>
             <div id="completed-section" class="item-list">
+                <ul id="completed-list">
 
+                </ul>
             </div>
             <div id="canceled-section" class="item-list">
+                <ul id="canceled-list">
 
+                </ul>
             </div>
         </div>
         <!-- footer -->

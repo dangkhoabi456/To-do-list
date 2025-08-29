@@ -1,5 +1,4 @@
 const navLinks = document.querySelectorAll('.nav-link');
-const sections = document.querySelectorAll('.section');
 const itemList = document.querySelectorAll('.item-list');
 
 
@@ -35,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
         task.className = "task";
 
         const container = document.createElement("div");
-        container.className = "task-container task-container";
+        container.className = "task-container";
         task.appendChild(container);
 
         const title = document.createElement("h3");
@@ -64,9 +63,33 @@ document.addEventListener('DOMContentLoaded', function() {
         cancel.textContent = "Cancel";
         container.appendChild(cancel);
 
-      if(taskName == "" || taskDescription == "" || taskDeadline == ""){
-        alert("Please fill in all fields before adding a task.");
-      };
+        let sameTask = false;
+        document.querySelectorAll('.task').forEach(item => {
+          let nameCreated = item.querySelector('.task-name').textContent;
+          let descCreated = item.querySelector('.task-description').textContent;
+          let deadlineCreated = item.querySelector('.task-deadline').getAttribute("datetime");
+          if (taskName === nameCreated && taskDescription === descCreated && taskDeadline === deadlineCreated) {
+            sameTask = true;
+          }
+        });
+
+        if (sameTask) {
+          alert("This task already exists. Please enter a different task.");
+          return;
+        }
+
+        if(taskName == "" || taskDescription == "" || taskDeadline == ""){
+            alert("Please fill in all fields before adding a task.");
+            document.getElementById("task-list").removeChild(task);
+          };
+
+          let now = new Date();
+          let deadlineDate = new Date(taskDeadline);
+          if(now > deadlineDate){
+            alert("The deadline must be a future date and time.");
+            document.getElementById("task-list").removeChild(task);
+          };
+
         document.getElementById("task-list").appendChild(task);
     });
 });
@@ -81,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
       let completeStatus = document.createElement("p");
       completeStatus.className = "task-complete-status";
       completeStatus.textContent = "Task Completed!";
-      clone.appendChild(completeStatus);
+      clone.querySelector(".task-container").appendChild(completeStatus);
 
 
       document.getElementById("completed-list").appendChild(clone);
@@ -96,9 +119,9 @@ document.addEventListener('DOMContentLoaded', function() {
       clone.querySelector(".task-cancel").remove();
       
       let cancelStatus = document.createElement("p");
-      cancelStatus.className = "task-complete-status";
+      cancelStatus.className = "task-cancel-status";
       cancelStatus.textContent = "Task Canceled!";
-      clone.appendChild(cancelStatus);
+      clone.querySelector(".task-container").appendChild(cancelStatus);
 
       document.getElementById("canceled-list").appendChild(clone);
       document.getElementById("task-list").removeChild(taskNode);
@@ -109,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentTime = new Date();
     let overdude = document.querySelectorAll('.task-deadline');
     overdude.forEach(deadline => {
-      let deadLineTime = new Date(deadline.datetime);
+      let deadLineTime = new Date(deadline.getAttribute("datetime"));
       if(currentTime > deadLineTime){
         let taskNode = deadline.closest(".task");
         let cloneNode = taskNode.cloneNode(true);
