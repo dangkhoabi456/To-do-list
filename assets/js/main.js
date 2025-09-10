@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let addTaskForm = document.getElementById("add-task-form");
         addTaskForm.reset();
 
-        //create a new task item
+        //tạo task mới
         const task = document.createElement("li");
         task.className = "task";
 
@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
         cancel.textContent = "Cancel";
         container.appendChild(cancel);
 
+        //kiểm tra có trùng task không
         let sameTask = false;
         document.querySelectorAll('.task').forEach(item => {
           let nameCreated = item.querySelector('.task-name').textContent;
@@ -78,11 +79,13 @@ document.addEventListener('DOMContentLoaded', function() {
           return;
         }
 
+        //kiểm tra xem ô input có trống không
         if(taskName == "" || taskDescription == "" || taskDeadline == ""){
             alert("Please fill in all fields before adding a task.");
             document.getElementById("task-list").removeChild(task);
           };
 
+        //kiểm tra xem time có phải đến từ quá khứ không
           let now = new Date();
           let deadlineDate = new Date(taskDeadline);
           if(now > deadlineDate){
@@ -90,44 +93,67 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById("task-list").removeChild(task);
           };
 
+        //xác nhận có phải là daily task không
+        let dailyTaskChecked = document.getElementById("daily-task-checked");
+          if(dailyTaskChecked.checked){
+            setInterval(function(){
+                function getSecondsInDay(date) {
+                  return date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds();
+                }//lấy ra thuộc tính giờ phút giây của object Date() để so sánh
+                 // chuyển giá trị về số nguyên (đơn vị là giây) để so sánh
+                let now = new Date();
+                let todayMidnight = new Date();
+                todayMidnight.setHours(0, 0, 0, 0);
+
+                let nowSeconds = getSecondsInDay(now);
+                let midnightSeconds = getSecondsInDay(todayMidnight);
+
+                if (nowSeconds === midnightSeconds) {
+                  
+                }
+            })
+          }
+
         document.getElementById("task-list").appendChild(task);
     });
 });
 
+    //đánh dấu task đã complete
   document.getElementById("task-list").addEventListener("click", function(e) {
     if (e.target.classList.contains("task-complete")) {
       let taskNode = e.target.closest(".task");
-      let clone = taskNode.cloneNode(true);
-      clone.querySelector(".task-complete").remove();
-      clone.querySelector(".task-cancel").remove();
+      taskNode.querySelector(".task-complete").remove();
+      taskNode.querySelector(".task-cancel").remove();
 
       let completeStatus = document.createElement("p");
       completeStatus.className = "task-complete-status";
-      completeStatus.textContent = "Task Completed!";
-      clone.querySelector(".task-container").appendChild(completeStatus);
+      completeStatus.textContent = "Task completed!";
+      taskNode.querySelector(".task-container").appendChild(completeStatus);
 
 
-      document.getElementById("completed-list").appendChild(clone);
-      document.getElementById("task-list").removeChild(taskNode);
+      document.getElementById("completed-list").appendChild(taskNode);
+      
     }
   });
+
+  //đánh dấu task đã cancel
   document.getElementById("task-list").addEventListener("click", function(e) {
     if (e.target.classList.contains("task-cancel")) {
       let taskNode = e.target.closest(".task");
-      let clone = taskNode.cloneNode(true);
-      clone.querySelector(".task-complete").remove();
-      clone.querySelector(".task-cancel").remove();
+      taskNode.querySelector(".task-complete").remove();
+      taskNode.querySelector(".task-cancel").remove();
       
       let cancelStatus = document.createElement("p");
       cancelStatus.className = "task-cancel-status";
-      cancelStatus.textContent = "Task Canceled!";
-      clone.querySelector(".task-container").appendChild(cancelStatus);
+      cancelStatus.textContent = "Task canceled!";
+      taskNode.querySelector(".task-container").appendChild(cancelStatus);
 
-      document.getElementById("canceled-list").appendChild(clone);
-      document.getElementById("task-list").removeChild(taskNode);
+      document.getElementById("canceled-list").appendChild(taskNode);
+      
     }
   });
 
+    //tự động cancel task khi qua deadline
   setInterval(function(){
     let currentTime = new Date();
     let overdude = document.querySelectorAll('.task-deadline');
@@ -141,12 +167,99 @@ document.addEventListener('DOMContentLoaded', function() {
         cloneNode.querySelector(".task-cancel").remove();
 
         let cancelStatus = document.createElement("p");
-        cancelStatus.className = "task-complete-status";
-        cancelStatus.textContent = "Task Canceled!";
-        cloneNode.appendChild(cancelStatus);
+        cancelStatus.className = "task-cancel-status";
+        cancelStatus.textContent = "Task canceled!";
+        cloneNode.querySelector(".task-container").appendChild(cancelStatus);
 
         document.getElementById("task-list").removeChild(taskNode);
         document.getElementById("canceled-list").appendChild(cloneNode);
       }
     });
   }, 1000);
+
+    //tìm task
+  document.getElementById('search-button').addEventListener("click", function(event) {
+  event.preventDefault();
+  itemList.forEach(section => section.style.display = 'none');
+  navLinks.forEach(item => item.classList.remove('active'));
+
+  const taskSearch = document.getElementById("search").value;
+  const taskTitleExisted = document.querySelectorAll(".task-name");
+
+  // Dùng find, sử dụng Array.from để chuyển đổi NodeList thanh Array để xài find
+  const foundTask = Array.from(taskTitleExisted).find(task => task.textContent === taskSearch);
+
+  if (foundTask) {
+    // Nếu tìm thấy
+    document.getElementById("result-section").style.display = "block";
+
+    let taskNode = foundTask.closest(".task");
+    taskNode.classList.remove("task");
+    taskNode.classList.add("result-task");
+
+    document.getElementById("result-list").appendChild(taskNode);
+  } else {
+    // Không tìm thấy
+    document.getElementById("result-list").innerHTML = "<li>No task found.</li>";
+  }
+});
+
+  //đánh dấu task đã cancel trong result
+  document.getElementById("result-list").addEventListener("click", function(e) {
+    if (e.target.classList.contains("task-cancel")) {
+      let taskNode = e.target.closest(".result-task");
+      taskNode.querySelector(".task-complete").remove();
+      taskNode.querySelector(".task-cancel").remove();
+      
+      let cancelStatus = document.createElement("p");
+      cancelStatus.className = "task-cancel-status";
+      cancelStatus.textContent = "Task canceled!";
+      taskNode.querySelector(".task-container").appendChild(cancelStatus);
+
+      document.getElementById("canceled-list").appendChild(taskNode);
+    }
+  });
+
+    //đánh dấu task đã complete trong result
+    document.getElementById("result-list").addEventListener("click", function(e) {
+    if (e.target.classList.contains("task-complete")) {
+      let taskNode = e.target.closest(".result-task");
+      taskNode.querySelector(".task-complete").remove();
+      taskNode.querySelector(".task-cancel").remove();
+      
+      let completeStatus = document.createElement("p");
+      completeStatus.className = "task-complete-status";
+      completeStatus.textContent = "Task completed!";
+      taskNode.querySelector(".task-container").appendChild(completeStatus);
+
+      document.getElementById("completed-list").appendChild(taskNode);
+    }
+  });
+
+    //chuyển lại các task từ result-task sang task
+  document.getElementById("task").addEventListener("click", function() {
+    let taskLost = document.querySelectorAll('.result-task');
+    let taskComplete = document.querySelectorAll('.result-task .task-complete-status');
+    let taskCancel = document.querySelectorAll('.result-task .task-cancel-status');
+
+      //do nothing
+    if(taskLost.length == 0){
+      
+    } 
+    //không thêm các task đã complete và cancel vào task
+    else if(taskComplete.length > 0 || taskCancel.length > 0){
+      taskComplete.forEach(complete => {
+      complete.remove();
+      });
+      taskCancel.forEach(cancel => {
+      cancel.remove();
+      });
+
+    } else{
+    taskLost.forEach(task => {
+      task.classList.remove("result-task");
+      task.classList.add("task");
+    document.getElementById("task-list").appendChild(task);
+    });
+  }
+  });
