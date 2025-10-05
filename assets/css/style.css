@@ -77,7 +77,7 @@ input.form-control {
   border-top: 40px solid green;
 }
 
-#completed-list .task-container .task-complete-status{
+.task-complete-status{
   text-align: center;
   color: white;
   background-color: green;
@@ -91,7 +91,7 @@ input.form-control {
   border-top: 40px solid red;
 }
 
-#canceled-list .task-container .task-cancel-status{
+.task-cancel-status{
   text-align: center;
   color: white;
   background-color: red;
@@ -100,3 +100,19 @@ input.form-control {
   border-radius: 10px;
   font-weight: bold;
 }
+
+#result-list li.result-task{
+    list-style: none;
+}
+
+label{
+  position: relative;
+  bottom:0.5px; /* có thể thay bằng: top:-0,5px */
+  color: white;
+  font-weight: bold;
+}
+
+#daily-task-checked{
+  transform: scale(1.5); /*tăng kích thước của check box*/
+}
+
