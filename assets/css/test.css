@@ -6,9 +6,17 @@
   background: #403c3c;
 }
 /*Task list section*/
+
 .task{
   list-style: none;
 }
+
+.task .ti-close{
+  position: absolute;
+  top: 5%;
+  right: 3%;
+}
+
 .task-complete{
   background-color: green;
   color: white;
@@ -23,6 +31,11 @@
   border-radius: 5px;
   padding: 5px;
 }
+.task-container{
+    list-style: none;
+  position: relative;
+}
+
 
 .nav-item a:hover{
     background-color: red;
