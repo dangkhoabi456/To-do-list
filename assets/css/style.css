@@ -6,9 +6,17 @@
   background: #403c3c;
 }
 /*Task list section*/
+
 .task{
   list-style: none;
 }
+
+.task .ti-close{
+  position: absolute;
+  top: 5%;
+  right: 3%;
+}
+
 .task-complete{
   background-color: green;
   color: white;
@@ -23,6 +31,11 @@
   border-radius: 5px;
   padding: 5px;
 }
+.task-container{
+    list-style: none;
+  position: relative;
+}
+
 
 .nav-item a:hover{
     background-color: red;
@@ -91,6 +104,7 @@ input.form-control {
   border-top: 40px solid red;
 }
 
+
 .task-cancel-status{
   text-align: center;
   color: white;
@@ -107,12 +121,12 @@ input.form-control {
 
 label{
   position: relative;
-  bottom:0.5px; /* có thể thay bằng: top:-0,5px */
+  bottom:0.5px; 
   color: white;
   font-weight: bold;
 }
 
 #daily-task-checked{
-  transform: scale(1.5); /*tăng kích thước của check box*/
+  transform: scale(1.5);
 }
 

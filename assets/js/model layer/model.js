@@ -5,29 +5,29 @@ export class Task {
         this.deadline = deadline;
         this.id = id;
     }
-    getName (){
+    getName() {
         return this.name;
     }
 
-    getDescription (){
+    getDescription() {
         return this.description;
     }
-    getDeadline (){
+    getDeadline() {
         return this.deadline;
     }
 
-    getId (){
+    getId() {
         return this.id;
     }
-    setName (newName){
+    setName(newName) {
         this.name = newName;
     }
 
-    setDescription (newDescription){
+    setDescription(newDescription) {
         this.description = newDescription;
     }
 
-    setDeadline (newDeadline){
+    setDeadline(newDeadline) {
         this.deadline = newDeadline;
     }
 }

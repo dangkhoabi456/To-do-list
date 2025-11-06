@@ -1,95 +1,97 @@
 export class TaskDisplay {
-    renderNewTask(newTask) {
-        const title = document.createElement("h3");
-        title.className = "task-name";
-        title.textContent = newTask.getName();
+    renderNewTasks(taskList) {
+        document.getElementById("task-list").innerHTML = "";
 
-        const description = document.createElement("p");
-        description.className = "task-description";
-        description.textContent = newTask.getDescription();
+        for (let task of taskList) {
+            const title = document.createElement("h3");
+            title.className = "task-name";
+            title.textContent = task.getName();
 
-        const deadline = document.createElement("p");
-        deadline.className = "task-deadline";
-        deadline.textContent = "Deadline: " + newTask.getDeadline();
-        deadline.setAttribute("datetime", newTask.getDeadline());
+            const description = document.createElement("p");
+            description.className = "task-description";
+            description.textContent = task.getDescription();
 
-        const complete = document.createElement("button");
-        complete.className = "task-complete complete-button";
-        complete.textContent = "Complete";
+            const deadline = document.createElement("p");
+            deadline.className = "task-deadline";
+            deadline.textContent = "Deadline: " + task.getDeadline();
+            deadline.setAttribute("datetime", task.getDeadline());
 
-        const cancel = document.createElement("button");
-        cancel.className = "task-cancel cancel-button";
-        cancel.textContent = "Cancel";
-        
-        const deleteIcon = document.createElement("i");
-        deleteIcon.className = "ti-close";
+            const complete = document.createElement("button");
+            complete.className = "task-complete complete-button";
+            complete.textContent = "Complete";
 
-        const renderTask = [title, description, deadline, complete, cancel, deleteIcon];
+            const cancel = document.createElement("button");
+            cancel.className = "task-cancel cancel-button";
+            cancel.textContent = "Cancel";
 
-        const container = document.createElement("div");
-        container.className = "task-container";
-            for(let i = 0; i < renderTask.length ; i++){
-            container.appendChild(renderTask[i]);
+            const deleteIcon = document.createElement("i");
+            deleteIcon.className = "ti-close";
+
+            const renderTask = [title, description, deadline, complete, cancel, deleteIcon];
+
+            const container = document.createElement("div");
+            container.className = "task-container";
+
+            for (let i = 0; i < renderTask.length; i++) {
+                container.appendChild(renderTask[i]);
+            }
+            this.displayTask(container, task.getId());
         }
-
-        container.setAttribute("id", newTask.getId());
-        return container
     }
 
-    displayTask(container) {
+    displayTask(container, id) {
         const task = document.createElement("li");
         task.className = "task";
+        task.setAttribute("id", id);
         task.appendChild(container);
         document.getElementById("task-list").appendChild(task);
         let addTaskForm = document.getElementById("add-task-form");
         addTaskForm.reset();
     }
 
-    switchTab(navLinks, itemList) {
-        navLinks.forEach(links =>{
-            links.addEventListener('click', function () {
-                navLinks.forEach(item => item.classList.remove('active'));
-                this.classList.add('active');
-                itemList.forEach(section => section.style.display = 'none');
-                const targetId = this.getAttribute('data-target');
-                document.getElementById(targetId).style.display = 'block';
-            });
+    switchTab(navLinks, itemList, element) {
+        navLinks.forEach(links => {
+            links.classList.remove('active');
+            element.classList.add('active');
+            itemList.forEach(section => section.style.display = 'none');
+            const targetId = element.getAttribute('data-target');
+            document.getElementById(targetId).style.display = 'block';
         });
     }
 
-    markCompleteTask(e){
-    let taskNode = e.target.closest(".task");
-    taskNode.querySelector(".task-complete").remove();
-    taskNode.querySelector(".task-cancel").remove();
+    markCompleteTask(e) {
+        let taskNode = e.target.closest(".task");
+        taskNode.querySelector(".task-complete").remove();
+        taskNode.querySelector(".task-cancel").remove();
 
-    let completeStatus = document.createElement("p");
-    completeStatus.className = "task-complete-status";
-    completeStatus.textContent = "Task completed!";
-    taskNode.querySelector(".task-container").appendChild(completeStatus);
-    document.getElementById("completed-list").appendChild(taskNode);
+        let completeStatus = document.createElement("p");
+        completeStatus.className = "task-complete-status";
+        completeStatus.textContent = "Task completed!";
+        taskNode.querySelector(".task-container").appendChild(completeStatus);
+        document.getElementById("completed-list").appendChild(taskNode);
     }
 
-    markCancelTask(e){
-    let taskNode = e.target.closest(".task");
-    taskNode.querySelector(".task-complete").remove();
-    taskNode.querySelector(".task-cancel").remove();
+    markCancelTask(e) {
+        let taskNode = e.target.closest(".task");
+        taskNode.querySelector(".task-complete").remove();
+        taskNode.querySelector(".task-cancel").remove();
 
-    let cancelStatus = document.createElement("p");
-    cancelStatus.className = "task-cancel-status";
-    cancelStatus.textContent = "Task canceled!";
-    taskNode.querySelector(".task-container").appendChild(cancelStatus);
-    document.getElementById("canceled-list").appendChild(taskNode);
+        let cancelStatus = document.createElement("p");
+        cancelStatus.className = "task-cancel-status";
+        cancelStatus.textContent = "Task canceled!";
+        taskNode.querySelector(".task-container").appendChild(cancelStatus);
+        document.getElementById("canceled-list").appendChild(taskNode);
     }
 
-    removeFromTaskList(e){
+    removeFromTaskList(e) {
         document.getElementById("task-list").removeChild(e);
     }
 
-    removeFromCanceledList(e){
+    removeFromCanceledList(e) {
         document.getElementById("canceled-list").removeChild(e);
     }
 
-    removeFromCompletedList(e){
+    removeFromCompletedList(e) {
         document.getElementById("completed-list").removeChild(e);
     }
 }

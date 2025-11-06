@@ -1,51 +1,66 @@
 import { TaskBusiness } from "../business layer/business.js"
 import { TaskDisplay } from "./display.js"
-import {Utilities} from "../netural layer/utilities.js"
+import { Utilities } from "../netural layer/utilities.js"
 
 export class EventHandler {
-constructor(){
-    this.utilities = new Utilities();
-    this.taskBusiness = new TaskBusiness();
-    this.taskDisplay = new TaskDisplay();
-}
+    constructor() {
+        this.utilities = new Utilities();
+        this.taskBusiness = new TaskBusiness();
+        this.taskDisplay = new TaskDisplay();
+    }
 
     handleAddTask() {
         const userInput = this.utilities.getTaskInfo();
-        const newTask = this.taskBusiness.addTask(userInput.nameTask, userInput.descriptionTask, userInput.deadlineTask, userInput.taskId);
-        if(this.taskBusiness.checkTaskRepeat(newTask)){
-            alert("Task existed")
-            return;
+        this.taskBusiness.addTask(userInput.nameTask,
+            userInput.descriptionTask,
+            userInput.deadlineTask,
+            userInput.taskId);
+    }
+
+    handleDisplayTask(taskList) {
+        if (taskList == null) {
+            this.taskDisplay.renderNewTasks(this.taskBusiness.getTaskList());
+        } else {
+            this.taskDisplay.renderNewTasks(taskList);
         }
-        this.taskBusiness.increaseDataStorage(newTask);
-        const renderTask = this.taskDisplay.renderNewTask(newTask);
-        this.taskDisplay.displayTask(renderTask);
     }
 
-    handleSwitchTab(navLinks, itemList) {
-        this.taskDisplay.switchTab(navLinks, itemList);
+    handleSwitchTab(navLinks, itemList, element) {
+        this.taskDisplay.switchTab(navLinks, itemList, element);
     }
 
-    handleMarkCompleteTask(e){
+    handleMarkCompleteTask(e) {
         this.taskDisplay.markCompleteTask(e);
     }
 
-    handleMarkCancelTask(e){
+    handleMarkCancelTask(e) {
         this.taskDisplay.markCancelTask(e);
     }
 
-    handleDeleteTask(id){
-        this.taskBusiness.deleteTask(id);
-    }
-
-    handleRemoveTask(element){
+    handleRemoveTask(element) {
         this.taskDisplay.removeFromTaskList(element);
     }
 
-    handleRemoveTaskFromCacnceledList(element){
+    handleDeleteTask(id) {
+        this.taskBusiness.deleteTask(id);
+    }
+
+    handleRemoveTaskFromCacnceledList(element) {
         this.taskDisplay.removeFromCanceledList(element);
     }
 
-    handleRemoveTaskFromCompletedList(element){
+    handleRemoveTaskFromCompletedList(element) {
         this.taskDisplay.removeFromCompletedList(element);
     }
+
+    handleGetTaskList() {
+        let taskList = []
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            const value = JSON.parse(localStorage.getItem(key));
+            taskList.push(...value);
+        }
+        return taskList;
+    }
+
 }
