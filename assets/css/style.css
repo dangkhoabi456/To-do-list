@@ -1,0 +1,132 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}body{
+  background: #403c3c;
+}
+/*Task list section*/
+
+.task{
+  list-style: none;
+}
+
+.task .ti-close{
+  position: absolute;
+  top: 5%;
+  right: 3%;
+}
+
+.task-complete{
+  background-color: green;
+  color: white;
+  margin-right: 5px;
+  border-radius: 5px;
+  padding: 5px;
+}
+.task-cancel{
+  background-color: red;
+  color: white;
+  margin-left: 5px;
+  border-radius: 5px;
+  padding: 5px;
+}
+.task-container{
+    list-style: none;
+  position: relative;
+}
+
+
+.nav-item a:hover{
+    background-color: red;
+    color: white;
+}
+.nav-link.active {
+  background-color: orange !important; /* Màu nền */
+  color: white !important;             /* Màu chữ */
+  font-weight: bold;                    /* Chữ đậm */
+  border-radius: 5px;                   /* Bo góc */
+}
+.navbar-brand img{
+    width: 50px;
+    height: 50px;
+}
+
+.nav-item a{
+    color: white;
+}
+
+.dropdown-menu{
+    background-color: black;
+}
+
+nav{
+  background-color: black;
+}
+
+/*add task section*/
+input.form-control {
+  width: 50%;
+}
+
+.card{
+  background-color: #c53c34;
+}
+
+#add-task-form button {
+  background-color: #f4e2a8;
+}
+/*task section*/
+.task-container{
+  background-color: white;
+  width: 50%;
+  margin-top: 20px;
+  border-radius: 10px;
+  padding: 25px;
+}
+
+/*complete task section*/
+#completed-list .task-container{
+  border-top: 40px solid green;
+}
+
+.task-complete-status{
+  text-align: center;
+  color: white;
+  background-color: green;
+  margin: 0 auto;
+  width: 80%;
+  border-radius: 10px;
+  font-weight: bold;
+}
+/*cancel task section*/
+#canceled-list .task-container{
+  border-top: 40px solid red;
+}
+
+
+.task-cancel-status{
+  text-align: center;
+  color: white;
+  background-color: red;
+  margin: 0 auto;
+  width: 80%;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+#result-list li.result-task{
+    list-style: none;
+}
+
+label{
+  position: relative;
+  bottom:0.5px; 
+  color: white;
+  font-weight: bold;
+}
+
+#daily-task-checked{
+  transform: scale(1.5);
+}
+
