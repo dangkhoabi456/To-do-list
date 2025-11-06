@@ -6,27 +6,29 @@ const navLinks = document.querySelectorAll('.nav-link');
 const itemList = document.querySelectorAll('.item-list');
 
 let stored = eventHandler.handleGetTaskList();
-
+console.log(stored);
 let taskList = stored.map(t => new Task(t.name, t.description, t.deadline, t.id));
-
 eventHandler.handleDisplayTask(taskList);
 
 document.addEventListener("DOMContentLoaded", () => {
-    navLinks.forEach(link => link.addEventListener("click", (e) =>
-        eventHandler.handleSwitchTab(navLinks, itemList, e)));
+    navLinks.forEach(link => link.addEventListener("click", (e) => {
+        if(e.target.classList.contains("tab-display")){
+        eventHandler.handleSwitchTab(navLinks, itemList, e.target)
+        }
+    }
+    ));
 });
 
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("add-task-button").addEventListener("click", (e) => {
         e.preventDefault();
-        eventHandler.handleAddTask(taskList);
+        eventHandler.handleAddTask();
         console.log(taskList);
-        console.log(eventHandler.taskBusiness.getTaskList());
-        eventHandler.handleDisplayTask(taskList);
+        console.log(eventHandler.handleGetTaskList());
+        let newTaskList = eventHandler.handleGetTaskList().map(t => new Task(t.name, t.description, t.deadline, t.id));
+        eventHandler.handleDisplayTask(newTaskList);
     });
 });
-
-eventHandler.handleSwitchTab(navLinks, itemList);
 
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("task-list").addEventListener("click", (e) => {

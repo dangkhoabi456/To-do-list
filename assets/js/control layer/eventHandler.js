@@ -18,11 +18,7 @@ export class EventHandler {
     }
 
     handleDisplayTask(taskList) {
-        if (taskList == null) {
-            this.taskDisplay.renderNewTasks(this.taskBusiness.getTaskList());
-        } else {
             this.taskDisplay.renderNewTasks(taskList);
-        }
     }
 
     handleSwitchTab(navLinks, itemList, element) {
@@ -58,9 +54,8 @@ export class EventHandler {
         for (let i = 0; i < localStorage.length; i++) {
             const key = localStorage.key(i);
             const value = JSON.parse(localStorage.getItem(key));
-            taskList.push(...value);
+            taskList.push(value);
         }
         return taskList;
     }
-
 }

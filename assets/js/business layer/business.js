@@ -6,7 +6,7 @@ export class TaskBusiness {
         for (let i = 0; i < localStorage.length; i++) {
             const key = localStorage.key(i);
             const value = JSON.parse(localStorage.getItem(key));
-            this.localStorageList.push(...value);
+            this.localStorageList.push(value);
             this.taskList = this.localStorageList.map(t => new Task(t.name, t.description, t.deadline, t.id));
         }
     }
@@ -21,7 +21,7 @@ export class TaskBusiness {
             alert("Task existed");
         } else {
             this.taskList.push(newTask);
-            localStorage.setItem(taskId, JSON.stringify(this.taskList));
+            localStorage.setItem(taskId, JSON.stringify(newTask));
         }
     }
 
