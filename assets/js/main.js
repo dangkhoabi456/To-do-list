@@ -6,8 +6,8 @@ const navLinks = document.querySelectorAll('.nav-link');
 const itemList = document.querySelectorAll('.item-list');
 
 let stored = eventHandler.handleGetTaskList();
-console.log(stored);
 let taskList = stored.map(t => new Task(t.name, t.description, t.deadline, t.id));
+console.log(taskList);
 eventHandler.handleDisplayTask(taskList);
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("add-task-button").addEventListener("click", (e) => {
         e.preventDefault();
         eventHandler.handleAddTask();
-        console.log(taskList);
         console.log(eventHandler.handleGetTaskList());
         let newTaskList = eventHandler.handleGetTaskList().map(t => new Task(t.name, t.description, t.deadline, t.id));
         eventHandler.handleDisplayTask(newTaskList);
@@ -33,9 +32,13 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("task-list").addEventListener("click", (e) => {
         if (e.target.classList.contains("task-complete")) {
-            eventHandler.handleMarkCompleteTask(e);
+            let taskComplete = e.target.closest(".task");
+            let id = taskComplete.getAttribute("id");
+            eventHandler.handleMarkCompleteTask(taskComplete, "completed", id);
         } else if (e.target.classList.contains("task-cancel")) {
-            eventHandler.handleMarkCancelTask(e);
+            let taskCanceled = e.target.closest(".task");
+            let id = taskCanceled.getAttribute("id");
+            eventHandler.handleMarkCancelTask(taskCanceled, "canceled", id);
         }
     });
 });

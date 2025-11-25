@@ -19,6 +19,11 @@ export class TaskBusiness {
         const newTask = new Task(taskName, taskDescription, taskDeadline, taskId);
         if (this.checkTaskRepeat(newTask)) {
             alert("Task existed");
+        }
+        else if(this.checkValidDeadline(newTask)){
+            alert("Deadline invalid");
+        } else if(this.checkEmptyInfo(newTask)){
+            alert("Empty information");
         } else {
             this.taskList.push(newTask);
             localStorage.setItem(taskId, JSON.stringify(newTask));
@@ -33,8 +38,24 @@ export class TaskBusiness {
                 return true;
             }
         }
+        return false;
     }
 
+    checkValidDeadline(newTask) {
+        let now = new Date();
+        let checkTime = new Date(newTask.getDeadline());
+        if(checkTime < now){
+            return true;
+        }
+        return false;
+    }
+
+    checkEmptyInfo(newTask){
+        if(newTask.getName() === "" || newTask.getDescription() === "" || newTask.getDeadline() === ""){
+            return true;
+        }
+        return false;
+    }
     getTaskList() {
         return this.taskList;
     }
@@ -43,5 +64,13 @@ export class TaskBusiness {
         localStorage.removeItem(id);
         this.taskList = this.taskList.filter(task => task.getId() !== id);
     }
+
+    changeTaskStatus(id, newStatus){
+        for(let task of this.taskList){
+            if(task.getId() === id){
+                task.setStatus() = newStatus;
+            }
+    }
+}
 
 }

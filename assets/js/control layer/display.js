@@ -59,39 +59,47 @@ export class TaskDisplay {
         });
     }
 
-    markCompleteTask(e) {
-        let taskNode = e.target.closest(".task");
-        taskNode.querySelector(".task-complete").remove();
-        taskNode.querySelector(".task-cancel").remove();
+    markCompleteTask(element) {
+        element.querySelector(".task-complete").remove();
+        element.querySelector(".task-cancel").remove();
 
         let completeStatus = document.createElement("p");
         completeStatus.className = "task-complete-status";
         completeStatus.textContent = "Task completed!";
-        taskNode.querySelector(".task-container").appendChild(completeStatus);
-        document.getElementById("completed-list").appendChild(taskNode);
+        element.querySelector(".task-container").appendChild(completeStatus);
+        document.getElementById("completed-list").appendChild(element);
     }
 
-    markCancelTask(e) {
-        let taskNode = e.target.closest(".task");
-        taskNode.querySelector(".task-complete").remove();
-        taskNode.querySelector(".task-cancel").remove();
+    markCancelTask(element) {
+        element.querySelector(".task-complete").remove();
+        element.querySelector(".task-cancel").remove();
 
         let cancelStatus = document.createElement("p");
         cancelStatus.className = "task-cancel-status";
         cancelStatus.textContent = "Task canceled!";
-        taskNode.querySelector(".task-container").appendChild(cancelStatus);
-        document.getElementById("canceled-list").appendChild(taskNode);
+        element.querySelector(".task-container").appendChild(cancelStatus);
+        document.getElementById("canceled-list").appendChild(element);
     }
 
-    removeFromTaskList(e) {
-        document.getElementById("task-list").removeChild(e);
+    removeFromTaskList(element) {
+        document.getElementById("task-list").removeChild(element);
     }
 
-    removeFromCanceledList(e) {
-        document.getElementById("canceled-list").removeChild(e);
+    removeFromCanceledList(element) {
+        document.getElementById("canceled-list").removeChild(element);
     }
 
-    removeFromCompletedList(e) {
-        document.getElementById("completed-list").removeChild(e);
+    removeFromCompletedList(element) {
+        document.getElementById("completed-list").removeChild(element);
+    }
+
+    confirmDeleteTask(){
+        let deleteBox = document.createElement("div");
+        deleteBox.className = "delete_box";
+
+        let deleteText = document.createElement("p");
+        deleteText.textContent = "Are you sure you want to delete this task?";
+        deleteBox.appendChild(deleteText);
+        document.body.appendChild(deleteBox);
     }
 }

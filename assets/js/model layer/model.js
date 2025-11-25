@@ -4,9 +4,14 @@ export class Task {
         this.description = description;
         this.deadline = deadline;
         this.id = id;
+        this.status = "pending";
     }
     getName() {
         return this.name;
+    }
+
+    getStatus(){
+        return this.status;
     }
 
     getDescription() {
@@ -21,6 +26,10 @@ export class Task {
     }
     setName(newName) {
         this.name = newName;
+    }
+
+    setStatus(newStatus){
+        this.status = newStatus;
     }
 
     setDescription(newDescription) {

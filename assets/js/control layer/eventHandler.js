@@ -25,15 +25,18 @@ export class EventHandler {
         this.taskDisplay.switchTab(navLinks, itemList, element);
     }
 
-    handleMarkCompleteTask(e) {
-        this.taskDisplay.markCompleteTask(e);
+    handleMarkCompleteTask(element, status, id) {
+        this.taskBusiness.changeTaskStatus(id, status);
+        this.taskDisplay.markCompleteTask(element);
     }
 
-    handleMarkCancelTask(e) {
-        this.taskDisplay.markCancelTask(e);
+    handleMarkCancelTask(element, status, id) {
+        this.taskBusiness.changeTaskStatus(id, status);
+        this.taskDisplay.markCancelTask(element);
     }
 
     handleRemoveTask(element) {
+        this.taskDisplay.confirmDeleteTask();
         this.taskDisplay.removeFromTaskList(element);
     }
 
@@ -42,10 +45,12 @@ export class EventHandler {
     }
 
     handleRemoveTaskFromCacnceledList(element) {
+        this.taskDisplay.confirmDeleteTask();
         this.taskDisplay.removeFromCanceledList(element);
     }
 
     handleRemoveTaskFromCompletedList(element) {
+        this.taskDisplay.confirmDeleteTask();
         this.taskDisplay.removeFromCompletedList(element);
     }
 
