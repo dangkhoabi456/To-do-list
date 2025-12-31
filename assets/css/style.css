@@ -130,3 +130,29 @@ label{
   transform: scale(1.5);
 }
 
+.delete_box{
+  border: 5px solid grey;
+  background-color: white;
+  /* Use fixed to position relative to the viewport so it stays centered
+     even when scrolling or when other containers have transforms */
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  /* size and spacing that adapts to narrow screens */
+  max-width: 90vw;
+  width: 420px;
+  padding: 1.25rem 1.5rem;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  height: 10em;
+}
+
+/* Slightly adjust padding for very small screens */
+@media (max-width: 480px){
+  .delete_box{
+    width: calc(100% - 32px);
+    padding: 1rem;
+  }
+}

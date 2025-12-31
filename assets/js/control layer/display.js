@@ -99,6 +99,17 @@ export class TaskDisplay {
 
         let deleteText = document.createElement("p");
         deleteText.textContent = "Are you sure you want to delete this task?";
+        let yesButton = document.createElement("button");
+        yesButton.className = "yes_button";
+        yesButton.textContent = "Yes";
+        let noButton = document.createElement("button");
+        noButton.className = "no_button";
+        noButton.textContent = "No";
+        let buttonContainer = document.createElement("div");
+        buttonContainer.className = "button_container";
+        buttonContainer.appendChild(yesButton);
+        buttonContainer.appendChild(noButton);
+        deleteBox.appendChild(buttonContainer);
         deleteBox.appendChild(deleteText);
         document.body.appendChild(deleteBox);
     }

@@ -6,6 +6,7 @@ const navLinks = document.querySelectorAll('.nav-link');
 const itemList = document.querySelectorAll('.item-list');
 
 let stored = eventHandler.handleGetTaskList();
+console.log(stored);
 let taskList = stored.map(t => new Task(t.name, t.description, t.deadline, t.id));
 console.log(taskList);
 eventHandler.handleDisplayTask(taskList);
